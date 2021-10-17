@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './Pages/Home/';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import video from './1.mp4';
+import video from './bg-video.mp4';
 
 function App() {
   const client = new ApolloClient({
