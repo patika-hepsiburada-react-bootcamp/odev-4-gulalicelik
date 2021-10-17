@@ -48,7 +48,55 @@
 
   margin-bottom: 50px;
 }
-#cities {
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #212121;
+  background-image: none;
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  padding: 10px 20px;
+  position: relative;
+  display: flex;
+  width: 26em;
+  height: 5em;
+  line-height: 5;
+  background: #212121;
+  overflow: hidden;
+  border-radius: 9px;
+}
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #212121;
+  color: white;
+  cursor: pointer;
+  pointer-events: none;
+  transition: 0.25s all ease;
+}
+.select:hover::after {
+  color: white;
+}
+
+/* #cities {
   padding: 10px 20px;
   height: 50px;
   width: 300px;
@@ -60,7 +108,7 @@
 #cities::-moz-focusring {
   color: transparent;
   text-shadow: 0 0 0 #000;
-}
+} */
 .weather {
   display: flex;
   align-items: center;

@@ -18,6 +18,7 @@ function App() {
             Your browser does not support HTML5 video.
           </video>
         </div>
+
         <div className="layout">
           <Home />
         </div>

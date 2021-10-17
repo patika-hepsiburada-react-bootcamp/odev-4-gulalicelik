@@ -33,17 +33,18 @@ function Home() {
     <div className="home">
       <div className="content">
         <h1 className="title">Weather App</h1>
-
-        <select id="cities" name="cities" onChange={handleChange}>
-          <option value="">Select city</option>
-          {cities.map(city => {
-            return (
-              <option key={city.id} value={city.name}>
-                {city.name}
-              </option>
-            );
-          })}
-        </select>
+        <div class="select">
+          <select id="cities" name="cities" onChange={handleChange}>
+            <option value="">Select city</option>
+            {cities.map(city => {
+              return (
+                <option key={city.id} value={city.name}>
+                  {city.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
 
         <div className="weather">
           {loading ? (
@@ -52,7 +53,7 @@ function Home() {
               color="#FFFFFF"
               height={100}
               width={100}
-              timeout={3000} //3 secs
+              timeout={1000}
             />
           ) : first ? (
             'Hey Siri! Bu gün hava nasıl olacak ? Dur orası burası değildi. '
