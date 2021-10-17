@@ -1,0 +1,88 @@
+import React, { useState } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { GET_WEATHER_QUERY } from '../../graphql/Queries';
+import { cities } from '../../cities';
+import slugify from 'slugify';
+import '../../App.css';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import Loader from 'react-loader-spinner';
+
+import kelvinToCelsius from 'kelvin-to-celsius';
+
+function Home() {
+  const [first, setfirst] = useState(true);
+  const [citySearched, setCitySearched] = useState('malatya');
+  const [getWeather, { data, error, loading }] = useLazyQuery(
+    GET_WEATHER_QUERY,
+    {
+      variables: { name: citySearched },
+    }
+  );
+
+  if (error) return <h1> Error found</h1>;
+
+  const handleChange = e => {
+    setfirst(false);
+    console.log(e.target.value);
+    setCitySearched(slugify(e.target.value));
+    getWeather();
+  };
+  console.log(data);
+
+  return (
+    <div className="home">
+      <div className="content">
+        <h1 className="title">Weather App</h1>
+
+        <select id="cities" name="cities" onChange={handleChange}>
+          <option value="">Select city</option>
+          {cities.map(city => {
+            return (
+              <option key={city.id} value={city.name}>
+                {city.name}
+              </option>
+            );
+          })}
+        </select>
+
+        <div className="weather">
+          {loading ? (
+            <Loader
+              type="Watch"
+              color="#FFFFFF"
+              height={100}
+              width={100}
+              timeout={3000} //3 secs
+            />
+          ) : first ? (
+            'Hey Siri! Bu gün hava nasıl olacak ? Dur orası burası değildi. '
+          ) : (
+            <div className="result">
+              <div className="top">
+                <h2 className="city-name"> {data.getCityByName.name} </h2>
+                <img
+                  src={`http://openweathermap.org/img/wn/${data.getCityByName.weather.summary.icon}@2x.png`}
+                  alt=""
+                />
+              </div>
+
+              <h2 className="city-temp">
+                Sıcaklık:
+                {kelvinToCelsius(
+                  data.getCityByName.weather.temperature.actual
+                ).toFixed(1)}
+                <span>&#8451;</span>
+              </h2>
+              <h2>
+                Description: {data.getCityByName.weather.summary.description}
+              </h2>
+              <h2>Rüzgar hızı: {data.getCityByName.weather.wind.speed}</h2>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Home;
