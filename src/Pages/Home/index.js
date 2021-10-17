@@ -24,7 +24,9 @@ function Home() {
   const handleChange = e => {
     setfirst(false);
     console.log(e.target.value);
-    setCitySearched(slugify(e.target.value));
+    if (e.target.value !== 'select') {
+      setCitySearched(slugify(e.target.value));
+    }
     getWeather();
   };
   console.log(data);
@@ -35,7 +37,7 @@ function Home() {
         <h1 className="title">Weather App</h1>
         <div class="select">
           <select id="cities" name="cities" onChange={handleChange}>
-            <option value="">Select city</option>
+            <option value="select">Select city</option>
             {cities.map(city => {
               return (
                 <option key={city.id} value={city.name}>
@@ -56,7 +58,7 @@ function Home() {
               timeout={1000}
             />
           ) : first ? (
-            'Hey Siri! Bu gün hava nasıl olacak ? Dur orası burası değildi. '
+            <p>Please select a city</p>
           ) : (
             <div className="result">
               <div className="top">
