@@ -49,8 +49,8 @@ function Home() {
         <div className="weather">
           {loading ? (
             <Loader
-              type="Watch"
-              color="#FFFFFF"
+              type="ThreeDots"
+              color="#212121"
               height={100}
               width={100}
               timeout={1000}
@@ -67,17 +67,26 @@ function Home() {
                 />
               </div>
 
-              <h2 className="city-temp">
-                Sıcaklık:
-                {kelvinToCelsius(
-                  data.getCityByName.weather.temperature.actual
-                ).toFixed(1)}
-                <span>&#8451;</span>
-              </h2>
-              <h2>
-                Description: {data.getCityByName.weather.summary.description}
-              </h2>
-              <h2>Rüzgar hızı: {data.getCityByName.weather.wind.speed}</h2>
+              <div className="temp fl">
+                <h2 className="city-temp">Heat :</h2>
+                <h2 className="rs">
+                  {kelvinToCelsius(
+                    data.getCityByName.weather.temperature.actual
+                  ).toFixed(1)}
+                  <span>&#8451;</span>
+                </h2>
+              </div>
+              <div className="dsc fl">
+                <h2>Description :</h2>
+                <h2 className="rs">
+                  {' '}
+                  {data.getCityByName.weather.summary.description.toUpperCase()}
+                </h2>
+              </div>
+              <div className="wnd fl">
+                <h2>Wind Speed : </h2>
+                <h2 className="rs">{data.getCityByName.weather.wind.speed}</h2>
+              </div>
             </div>
           )}
         </div>
