@@ -1,1 +1,1 @@
-# odev-4-gulalicelik
+Cumaya gittim gelcem 
